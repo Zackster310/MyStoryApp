@@ -22,6 +22,10 @@ export default class HomeScreen extends React.Component{
                 <TouchableOpacity style = {styles.button} onPress = {() => {this.props.navigation.navigate("StoryScreen")}}>
                     <Text style = {styles.buttonText}> Join Stories</Text>
                 </TouchableOpacity>
+
+                <TouchableOpacity style = {styles.button} onPress = {() => {this.props.navigation.navigate("NewStoryScreen")}}>
+                    <Text style = {styles.buttonText}> Create Your Story </Text>
+                </TouchableOpacity>
             </View>
         )
     }
@@ -40,7 +44,7 @@ const styles = StyleSheet.create({
         margin: 5,
     },
     buttonText: {
-        fontSize: 30,
+        fontSize: 25,
         fontWeight: 'bold',
         textAlign: 'center',
         alignSelf: 'center',
