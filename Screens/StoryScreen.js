@@ -26,8 +26,23 @@ export default class StoryScreen extends React.Component{
             var min = Math.ceil(0); 
             var max = Math.floor(allStories.length);  
             var number = Math.floor(Math.random() * (max - min) + min);
+
             console.log("number:", number)
+            console.log(allStories[number], "allStories")
+            console.log(allStories[number].story, "story")
+
+            this.setState({
+                title: allStories[number].title,
+                currentStory: allStories[number].story
+            })
         })
+    }
+
+    updateStory = () => {
+        db.collection("stories").where("title", "==", this.state.title).update({
+            'story': this.state.addedStory
+        })
+        console.log(this.state.story, "story")
     }
 
     componentDidMount(){
@@ -46,7 +61,7 @@ export default class StoryScreen extends React.Component{
                            onChangeText = {text => {this.setState({addedStory: text})}}
                 />
 
-                <TouchableOpacity style = {styles.button}>
+                <TouchableOpacity style = {styles.button} onPress = {this.updateStory} >
                     <Text> Confirm </Text>
                 </TouchableOpacity>
 

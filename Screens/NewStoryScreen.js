@@ -1,6 +1,6 @@
 import React from 'react';
 import { render } from 'react-dom';
-import { StyleSheet, Text, View, TextInput, TouchableOpacity, Modal, ScrollView, KeyboardAvoidingView, Alert } from 'react-native';
+import { StyleSheet, Text, View, TextInput, TouchableOpacity, Modal, ScrollView, KeyboardAvoidingView, Alert, TouchableHighlightBase } from 'react-native';
 import firebase from 'firebase'
 import db from '../config';
 
@@ -19,7 +19,14 @@ export default class NewStoryScreen extends React.Component{
         console.log("addStory function")
         db.collection("stories").add({
             "userID": this.state.userID,
-            "story": this.state.story
+            "title": this.state.title,
+            "story": this.state.story,
+        })
+        alert("Story has been registered")
+
+        this.setState({
+            title: "",
+            story: ""
         })
     }
 
@@ -28,11 +35,13 @@ export default class NewStoryScreen extends React.Component{
             <View style = {{flex: 1, alignItems: 'center',}}>
                 <TextInput placeholder = "Title For Your Story"
                            style = {styles.title}
+                           value = {this.state.title}
                            onChangeText = {text => {this.setState({title: text})}}
                 />
 
                 <TextInput placeholder = "Start a story" 
                            style = {styles.addition}
+                           value = {this.state.story}
                            multiline
                            onChangeText = {text => {this.setState({story: text})}}
                 />
